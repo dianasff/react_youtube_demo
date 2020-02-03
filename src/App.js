@@ -17,6 +17,9 @@ class App extends Component {
           previousPageToken:'',
           pageToken:null,
           busca:'',
+          like:'',
+          dislike:'',
+          vis:'',
 
     };
   }
@@ -32,12 +35,14 @@ class App extends Component {
       q:termobusca
   }} );
     
+    
     this.setState({videos: resposta.data.items, 
                   selectedVideos: resposta.data.items[0], 
                   nextPageToken: resposta.data.nextPageToken, 
                   previousPageToken: resposta.data.prevPageToken,
                   pageToken:resposta.config.params.pageToken,
-                  busca:termobusca,  
+                  busca:termobusca,
+
                 });
     console.log('pegando os dados')
     console.log('termobusca')
@@ -50,9 +55,22 @@ class App extends Component {
   }
 
 
-   onVideoSelect = (video )=>{
+   onVideoSelect = async (video )=>{
     console.log(video)
-    this.setState({selectedVideos:video});
+    const id= video.id.videoId
+    console.log(id)
+    const resposta2= await Api.get('videos', {
+    params:{
+      part:'snippet, statistics',
+      id:id,
+      key:'AIzaSyCP8lufKgfTZ7tDE1gkRkaf4_DCyFXJ32o',
+      
+  }} );
+    console.log(resposta2)
+    this.setState({selectedVideos:video,
+      like:resposta2.data.items[0].statistics.likeCount,
+      dislike:resposta2.data.items[0].statistics.dislikeCount, 
+      vis:resposta2.data.items[0].statistics.viewCount });
     console.log(this.state.selectedVideos)
 
     
@@ -100,7 +118,7 @@ class App extends Component {
            <Route exact path='/' render={(routeProps)=> <Listavideos {...routeProps} videos={this.state.videos} busca={this.state.busca} nextPageToken={this.state.nextPageToken} previousPageToken={this.state.previousPageToken} onNextPage={this.onNextPage} onPreviousPage={this.onPreviousPage} onVideoSelect={this.onVideoSelect}/> } /> 
            <Switch> 
             
-            <Route exact path='/detalhes' render={(routeProps)=> <DetalhesVideo {...routeProps} video={this.state.selectedVideos}   /> } /> 
+            <Route exact path='/detalhes' render={(routeProps)=> <DetalhesVideo {...routeProps} video={this.state.selectedVideos} like={this.state.like} dislike={this.state.dislike} visual={this.state.vis}  /> } /> 
           </Switch>  
                     
         

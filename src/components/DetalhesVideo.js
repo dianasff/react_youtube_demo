@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
 
-const DetalhesVideo =({video}) => {
+const DetalhesVideo =({video, like, dislike, visual}) => {
 	console.log(video)
 	if(!video) return <div> Loading </div> 
 	const videoSrc=`https://www.youtube.com/embed/${video.id.videoId} `
@@ -16,6 +16,7 @@ const DetalhesVideo =({video}) => {
 				<div style={{padding:'15px'}} className='descricaodetalhes'>
 					<h1 className='titulodetalhes'>{video.snippet.title} - {video.snippet.channelTitle} </h1>
 					<p>{video.snippet.channelTitle} </p>
+					<p><b>Likes:</b> {like} <b>Dislikes:</b> {dislike} <b>Visualizações:</b> {visual} </p>
 					<p>{video.snippet.description} </p>
 				</div>
 			</div>	
