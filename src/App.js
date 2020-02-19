@@ -31,7 +31,7 @@ class App extends Component {
       part:'snippet',
       maxResults:15,
       pageToken:null,
-      key:'AIzaSyCP8lufKgfTZ7tDE1gkRkaf4_DCyFXJ32o',
+      key:'API_KEY',
       q:termobusca
   }} );
     
@@ -63,7 +63,7 @@ class App extends Component {
     params:{
       part:'snippet, statistics',
       id:id,
-      key:'AIzaSyCP8lufKgfTZ7tDE1gkRkaf4_DCyFXJ32o',
+      key:'API_KEY',
       
   }} );
     console.log(resposta2)
@@ -81,7 +81,7 @@ class App extends Component {
       part:'snippet',
       maxResults:15,
       pageToken:nextPageToken,
-      key:'AIzaSyCP8lufKgfTZ7tDE1gkRkaf4_DCyFXJ32o',
+      key:'API_KEY',
       q:busca
       
       
@@ -98,7 +98,7 @@ class App extends Component {
       part:'snippet',
       maxResults:15,
       pageToken:previousPageToken,
-      key:'AIzaSyCP8lufKgfTZ7tDE1gkRkaf4_DCyFXJ32o',
+      key:'API_KEY',
       q:busca
       
   }} );
